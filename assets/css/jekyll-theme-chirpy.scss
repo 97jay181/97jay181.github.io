@@ -3,24 +3,19 @@
 
 @use 'main';
 
-/* =========================================================
-   Clean macOS Dark Theme for Chirpy
-   ========================================================= */
+/* macOS-inspired refinement for Chirpy */
 
 :root {
-  --mac-bg: #16171a;
-  --mac-sidebar: rgba(29, 30, 33, 0.96);
-  --mac-surface: rgba(35, 36, 40, 0.82);
-  --mac-surface-hover: rgba(41, 42, 46, 0.9);
-  --mac-border: rgba(255, 255, 255, 0.09);
-  --mac-border-hover: rgba(255, 255, 255, 0.16);
+  --mac-bg: #17181b;
+  --mac-sidebar: #1d1e21;
+  --mac-surface: #202125;
+  --mac-surface-hover: #25262a;
+  --mac-border: rgba(255, 255, 255, 0.085);
   --mac-text: #f5f5f7;
-  --mac-muted: #a1a1a6;
+  --mac-secondary: #a1a1a6;
   --mac-blue: #0a84ff;
-  --mac-radius: 16px;
 }
 
-/* Apple 계열 시스템 글꼴 */
 html,
 body {
   background: var(--mac-bg) !important;
@@ -29,34 +24,15 @@ body {
     BlinkMacSystemFont,
     "SF Pro Text",
     "Apple SD Gothic Neo",
-    "Pretendard",
     sans-serif !important;
 }
 
-/* 전체 배경 */
-#main-wrapper,
-#main-wrapper > .container {
-  background:
-    radial-gradient(
-      circle at 68% 0%,
-      rgba(84, 92, 112, 0.12),
-      transparent 34rem
-    ),
-    var(--mac-bg) !important;
-}
+/* Sidebar */
 
-/* 사이드바 */
 #sidebar {
-  background:
-    linear-gradient(
-      180deg,
-      rgba(32, 33, 36, 0.98),
-      rgba(25, 26, 29, 0.98)
-    ) !important;
+  background: var(--mac-sidebar) !important;
   border-right: 1px solid var(--mac-border) !important;
-  box-shadow: 12px 0 38px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  box-shadow: none !important;
 }
 
 #sidebar .site-title {
@@ -66,123 +42,109 @@ body {
 }
 
 #sidebar .site-subtitle {
-  color: var(--mac-muted) !important;
+  color: var(--mac-secondary) !important;
 }
 
 #sidebar .nav-link {
-  margin: 4px 13px !important;
-  border: 1px solid transparent;
-  border-radius: 12px !important;
+  margin: 3px 14px !important;
+  border-radius: 10px !important;
+}
+
+#sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.045) !important;
+}
+
+#sidebar .nav-item.active .nav-link {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+/* Top bar */
+
+#topbar-wrapper {
+  background: rgba(23, 24, 27, 0.94) !important;
+  border-bottom: 1px solid var(--mac-border) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+#topbar {
+  position: relative;
+  padding-left: 70px !important;
+}
+
+#topbar::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #ff5f57;
+  box-shadow:
+    18px 0 0 #febc2e,
+    36px 0 0 #28c840;
+  transform: translateY(-50%);
+}
+
+#search {
+  border: 1px solid var(--mac-border) !important;
+  border-radius: 9px !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  box-shadow: none !important;
+}
+
+/* Main */
+
+#main-wrapper {
+  background: var(--mac-bg) !important;
+}
+
+#post-list .card-wrapper {
+  margin-bottom: 14px !important;
+}
+
+#post-list .card {
+  border: 1px solid var(--mac-border) !important;
+  border-radius: 13px !important;
+  background: var(--mac-surface) !important;
+  box-shadow: none !important;
   transition:
     background 0.18s ease,
     border-color 0.18s ease,
     transform 0.18s ease;
 }
 
-#sidebar .nav-link:hover {
-  background: rgba(255, 255, 255, 0.055) !important;
-  transform: translateX(2px);
-}
-
-#sidebar .nav-item.active .nav-link {
-  color: #fff !important;
-  background: rgba(255, 255, 255, 0.085) !important;
-  border-color: rgba(255, 255, 255, 0.065);
-  box-shadow:
-    inset 0 1px rgba(255, 255, 255, 0.055),
-    0 8px 22px rgba(0, 0, 0, 0.14);
-}
-
-/* 프로필 이미지 */
-#avatar img {
-  border: 1px solid rgba(255, 255, 255, 0.22) !important;
-  box-shadow:
-    0 0 0 5px rgba(255, 255, 255, 0.025),
-    0 16px 36px rgba(0, 0, 0, 0.28);
-}
-
-/* 상단바 */
-#topbar-wrapper {
-  background: rgba(21, 22, 25, 0.78) !important;
-  border-bottom: 1px solid var(--mac-border) !important;
-  backdrop-filter: blur(20px) saturate(130%);
-  -webkit-backdrop-filter: blur(20px) saturate(130%);
-}
-
-/* 상단에만 macOS 트래픽 라이트 */
-#topbar {
-  position: relative;
-}
-
-#topbar::before {
-  content: "";
-  display: block;
-  flex: 0 0 auto;
-  width: 11px;
-  height: 11px;
-  margin-right: 48px;
-  border-radius: 50%;
-  background: #ff5f57;
-  box-shadow:
-    18px 0 0 #febc2e,
-    36px 0 0 #28c840;
-}
-
-/* 검색창 */
-#search {
-  border: 1px solid var(--mac-border) !important;
-  border-radius: 999px !important;
-  background: rgba(255, 255, 255, 0.035) !important;
-  box-shadow:
-    inset 0 1px rgba(255, 255, 255, 0.025),
-    0 7px 18px rgba(0, 0, 0, 0.1);
-}
-
-/* 홈 게시글 카드 */
-#post-list .card {
-  border: 1px solid var(--mac-border) !important;
-  border-radius: var(--mac-radius) !important;
-  background:
-    linear-gradient(
-      145deg,
-      rgba(38, 39, 43, 0.88),
-      rgba(30, 31, 34, 0.92)
-    ) !important;
-  box-shadow:
-    inset 0 1px rgba(255, 255, 255, 0.035),
-    0 20px 50px rgba(0, 0, 0, 0.25) !important;
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
 #post-list .card:hover {
-  transform: translateY(-3px);
-  border-color: var(--mac-border-hover) !important;
   background: var(--mac-surface-hover) !important;
-  box-shadow:
-    inset 0 1px rgba(255, 255, 255, 0.045),
-    0 26px 62px rgba(0, 0, 0, 0.34) !important;
+  border-color: rgba(255, 255, 255, 0.14) !important;
+  transform: translateY(-1px);
 }
 
 #post-list .card-body {
-  padding: 30px !important;
+  padding: 24px 26px !important;
 }
 
 #post-list .card-title {
   color: var(--mac-text) !important;
-  font-weight: 680 !important;
-  letter-spacing: -0.03em;
+  font-weight: 650 !important;
+  letter-spacing: -0.025em;
 }
 
 #post-list .card-text,
 #post-list .post-content,
 #post-list .post-meta {
-  color: var(--mac-muted) !important;
+  color: var(--mac-secondary) !important;
 }
 
-/* 오른쪽 패널 */
+/* Right panel */
+
+#panel-wrapper {
+  color: var(--mac-secondary);
+}
+
 #panel-wrapper .access,
 #panel-wrapper #toc-wrapper {
   border-left: 1px solid var(--mac-border) !important;
@@ -190,81 +152,66 @@ body {
 
 .post-tag {
   border: 1px solid var(--mac-border) !important;
-  border-radius: 999px !important;
-  background: rgba(255, 255, 255, 0.025) !important;
+  border-radius: 8px !important;
+  background: transparent !important;
 }
 
-/* 게시글 상세 화면 */
+/* Post page */
+
 article.px-1 {
-  padding: clamp(24px, 4vw, 44px) !important;
+  padding: 30px 34px !important;
   border: 1px solid var(--mac-border);
-  border-radius: 18px;
+  border-radius: 14px;
   background: var(--mac-surface);
-  box-shadow: 0 22px 58px rgba(0, 0, 0, 0.28);
+  box-shadow: none;
 }
 
 article h1,
 article h2,
 article h3 {
   color: var(--mac-text);
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
 }
 
 .content a:not(.img-link) {
   color: #64aaff;
 }
 
-/* 코드 */
 code.highlighter-rouge {
-  padding: 0.15em 0.42em;
-  border: 1px solid rgba(255, 255, 255, 0.065);
-  border-radius: 6px;
+  border: 1px solid var(--mac-border);
+  border-radius: 5px;
   background: #292a2e;
   color: #ff9f43;
 }
 
 div.highlighter-rouge,
 figure.highlight {
-  overflow: hidden;
   border: 1px solid var(--mac-border) !important;
-  border-radius: 13px !important;
+  border-radius: 10px !important;
   background: #202124 !important;
-  box-shadow: 0 13px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: none !important;
 }
 
-/* 푸터 */
 footer {
   border-top: 1px solid var(--mac-border) !important;
-  color: #77787e !important;
 }
 
-/* 스크롤바 */
-::-webkit-scrollbar {
-  width: 10px;
-}
+/* Mobile */
 
-::-webkit-scrollbar-track {
-  background: #151619;
-}
-
-::-webkit-scrollbar-thumb {
-  border: 3px solid #151619;
-  border-radius: 999px;
-  background: #3d3e43;
-}
-
-/* 모바일 */
 @media (max-width: 849px) {
+  #topbar {
+    padding-left: inherit !important;
+  }
+
   #topbar::before {
     display: none;
   }
 
   #post-list .card-body {
-    padding: 22px !important;
+    padding: 20px !important;
   }
 
   article.px-1 {
-    padding: 22px 18px !important;
-    border-radius: 14px;
+    padding: 20px 17px !important;
   }
 }
