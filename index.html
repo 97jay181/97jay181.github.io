@@ -1,4 +1,88 @@
----
-layout: home
-# Index page
----
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hiJay97</title>
+  <meta
+    name="description"
+    content="개발과 일상을 기록하는 macOS 스타일 블로그"
+  >
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="/assets/js/app.js" defer></script>
+</head>
+<body>
+  <div class="desktop">
+    <main class="mac-window">
+      <header class="window-toolbar">
+        <div class="traffic-lights" aria-hidden="true">
+          <span class="traffic red"></span>
+          <span class="traffic yellow"></span>
+          <span class="traffic green"></span>
+        </div>
+
+        <strong class="window-title">hiJay97</strong>
+
+        <button class="theme-button" type="button" aria-label="테마 변경">
+          ◐
+        </button>
+      </header>
+
+      <div class="window-layout">
+        <aside class="sidebar">
+          <div class="profile">
+            <div class="avatar">J</div>
+            <h1>hiJay97</h1>
+            <p>개발과 일상을 기록하는 공간</p>
+          </div>
+
+          <nav class="sidebar-nav">
+            <a class="active" href="/">Home</a>
+            <a href="/posts/first-post.html">Blog</a>
+            <a href="/about.html">About</a>
+            <a href="https://github.com/97jay181">GitHub</a>
+          </nav>
+        </aside>
+
+        <section class="content">
+          <div class="content-header">
+            <div>
+              <span class="eyebrow">Welcome</span>
+              <h2>개발과 일상의 기록</h2>
+            </div>
+
+            <label class="search">
+              <span>⌕</span>
+              <input type="search" placeholder="Search">
+            </label>
+          </div>
+
+          <div class="post-grid">
+            <article class="post-card">
+              <div class="post-card-top">
+                <span class="post-category">Blog</span>
+                <time datetime="2026-07-18">2026.07.18</time>
+              </div>
+
+              <h3>
+                <a href="/posts/first-post.html">
+                  첫 번째 블로그 글
+                </a>
+              </h3>
+
+              <p>
+                GitHub Pages에서 실행되는 macOS 스타일 블로그의
+                첫 번째 게시글입니다.
+              </p>
+
+              <a class="read-more" href="/posts/first-post.html">
+                Read article →
+              </a>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
