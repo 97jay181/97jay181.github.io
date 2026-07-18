@@ -3,192 +3,382 @@
 
 @use 'main';
 
-/* macOS custom theme */
+/* =========================================================
+   macOS Dark — Chirpy Custom Theme
+   ========================================================= */
 
 :root {
-  --mac-bg: #111214;
-  --mac-sidebar: rgba(28, 29, 32, 0.96);
-  --mac-card: rgba(38, 39, 43, 0.88);
-  --mac-border: rgba(255, 255, 255, 0.1);
+  --mac-bg: #16171a;
+  --mac-sidebar: #1d1e21;
+  --mac-surface: rgba(38, 39, 43, 0.82);
+  --mac-surface-hover: rgba(43, 44, 49, 0.92);
+  --mac-border: rgba(255, 255, 255, 0.09);
+  --mac-border-hover: rgba(255, 255, 255, 0.16);
   --mac-text: #f5f5f7;
   --mac-muted: #a1a1a6;
+  --mac-blue: #0a84ff;
+  --mac-radius: 18px;
+  --mac-shadow: 0 24px 65px rgba(0, 0, 0, 0.32);
 }
 
+/* 기본 화면 */
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
-    "Apple SD Gothic Neo", sans-serif !important;
-  background: #111214 !important;
+  background: var(--mac-bg) !important;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "SF Pro Display",
+    "SF Pro Text",
+    "Apple SD Gothic Neo",
+    sans-serif !important;
 }
 
-/* 전체 배경 */
 #main-wrapper,
 #main-wrapper > .container,
 main {
   background:
-    radial-gradient(circle at 70% 0%, rgba(65, 70, 85, 0.18), transparent 35rem),
-    #111214 !important;
+    radial-gradient(
+      circle at 70% 0%,
+      rgba(80, 88, 110, 0.13),
+      transparent 34rem
+    ),
+    var(--mac-bg) !important;
 }
 
-/* 사이드바 */
+/* =========================================================
+   Sidebar
+   ========================================================= */
+
 #sidebar {
-  background: rgba(28, 29, 32, 0.96) !important;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(31, 32, 35, 0.98),
+      rgba(25, 26, 29, 0.98)
+    ) !important;
   border-right: 1px solid var(--mac-border) !important;
-  box-shadow: 16px 0 45px rgba(0, 0, 0, 0.25) !important;
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  box-shadow: 14px 0 42px rgba(0, 0, 0, 0.18) !important;
+}
+
+#sidebar ul,
+#sidebar ol {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+#sidebar li::marker {
+  content: "" !important;
 }
 
 #sidebar .site-title {
   color: var(--mac-text) !important;
-  font-weight: 700 !important;
+  font-weight: 720 !important;
   letter-spacing: -0.04em;
 }
 
 #sidebar .site-subtitle {
   color: var(--mac-muted) !important;
+  line-height: 1.55;
 }
 
 #sidebar .nav-link {
-  border-radius: 13px !important;
+  margin: 4px 13px !important;
+  border: 1px solid transparent;
+  border-radius: 12px !important;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+#sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.055) !important;
+  transform: translateX(2px);
 }
 
 #sidebar .nav-item.active .nav-link {
   color: #fff !important;
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.105),
+      rgba(255, 255, 255, 0.065)
+    ) !important;
+  border-color: rgba(255, 255, 255, 0.065);
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.06),
+    0 7px 20px rgba(0, 0, 0, 0.15);
 }
 
-/* 상단바 */
+#sidebar .sidebar-bottom,
+#sidebar .mode-toggle {
+  list-style: none !important;
+}
+
+#sidebar .sidebar-bottom a,
+#sidebar .sidebar-bottom button {
+  border-radius: 10px !important;
+}
+
+/* 프로필 이미지 */
+#avatar img {
+  border: 1px solid rgba(255, 255, 255, 0.22) !important;
+  box-shadow:
+    0 0 0 5px rgba(255, 255, 255, 0.025),
+    0 16px 38px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================================================
+   Top bar
+   ========================================================= */
+
 #topbar-wrapper {
-  background: rgba(20, 21, 24, 0.75) !important;
+  background: rgba(20, 21, 24, 0.78) !important;
   border-bottom: 1px solid var(--mac-border) !important;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px) saturate(135%);
+  -webkit-backdrop-filter: blur(20px) saturate(135%);
 }
 
 #topbar {
   position: relative;
 }
 
+/* 상단 트래픽 라이트 */
 #topbar::before {
   content: "";
-  width: 12px;
-  height: 12px;
-  margin-right: 54px;
+  display: block;
+  flex: 0 0 auto;
+  width: 11px;
+  height: 11px;
+  margin-right: 48px;
   border-radius: 50%;
   background: #ff5f57;
   box-shadow:
-    20px 0 #febc2e,
-    40px 0 #28c840;
+    18px 0 0 #febc2e,
+    36px 0 0 #28c840;
 }
 
-/* 검색창 */
 #search {
   border: 1px solid var(--mac-border) !important;
   border-radius: 999px !important;
-  background: rgba(255, 255, 255, 0.04) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.025),
+    0 7px 18px rgba(0, 0, 0, 0.12);
 }
 
-/* 홈 게시글 카드 */
-#post-list .card-wrapper,
-#post-list article,
-.post-preview {
+#search-input {
+  color: var(--mac-text) !important;
+}
+
+#search-input::placeholder {
+  color: #797a80 !important;
+}
+
+/* =========================================================
+   Home post cards
+   ========================================================= */
+
+#post-list .card-wrapper {
+  margin-bottom: 22px !important;
+}
+
+#post-list .card {
   overflow: hidden;
   border: 1px solid var(--mac-border) !important;
-  border-radius: 18px !important;
-  background: linear-gradient(
-    145deg,
-    rgba(41, 42, 46, 0.92),
-    rgba(29, 30, 33, 0.94)
-  ) !important;
+  border-radius: var(--mac-radius) !important;
+  background:
+    linear-gradient(
+      145deg,
+      rgba(42, 43, 47, 0.9),
+      rgba(30, 31, 34, 0.94)
+    ) !important;
   box-shadow:
-    inset 0 1px rgba(255, 255, 255, 0.04),
-    0 24px 60px rgba(0, 0, 0, 0.3) !important;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+    inset 0 1px rgba(255, 255, 255, 0.035),
+    var(--mac-shadow) !important;
+  transition:
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease;
 }
 
-#post-list .card-wrapper:hover,
-#post-list article:hover,
-.post-preview:hover {
+#post-list .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 30px 75px rgba(0, 0, 0, 0.42) !important;
+  border-color: var(--mac-border-hover) !important;
+  background: var(--mac-surface-hover) !important;
+  box-shadow:
+    inset 0 1px rgba(255, 255, 255, 0.05),
+    0 30px 74px rgba(0, 0, 0, 0.4) !important;
 }
 
 #post-list .card-body {
   position: relative;
-  padding-top: 58px !important;
+  padding: 72px 30px 28px !important;
 }
 
+/* 카드 트래픽 라이트 */
 #post-list .card-body::before {
   content: "";
   position: absolute;
-  top: 24px;
-  left: 28px;
+  top: 27px;
+  left: 30px;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: #ff5f57;
   box-shadow:
-    17px 0 #febc2e,
-    34px 0 #28c840;
+    17px 0 0 #febc2e,
+    34px 0 0 #28c840;
 }
 
-#post-list .card-title,
-#post-list h1,
-#post-list h2 {
+/* 카드 제목 표시줄 */
+#post-list .card-body::after {
+  content: "";
+  position: absolute;
+  top: 54px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--mac-border);
+}
+
+#post-list .card-title {
   color: var(--mac-text) !important;
+  font-weight: 680 !important;
   letter-spacing: -0.035em;
 }
 
 #post-list .card-text,
-#post-list .post-content,
-.post-meta {
+#post-list .post-content {
   color: var(--mac-muted) !important;
 }
 
-/* 오른쪽 패널 */
+#post-list .post-meta {
+  color: #85868c !important;
+}
+
+/* =========================================================
+   Right panel
+   ========================================================= */
+
+#panel-wrapper {
+  color: var(--mac-muted);
+}
+
 #panel-wrapper .access,
 #panel-wrapper #toc-wrapper {
   border-left: 1px solid var(--mac-border) !important;
 }
 
+#panel-wrapper ul {
+  list-style: none !important;
+  padding-left: 0 !important;
+}
+
+#panel-wrapper li::marker {
+  content: "" !important;
+}
+
 .post-tag {
   border: 1px solid var(--mac-border) !important;
   border-radius: 999px !important;
-  background: rgba(255, 255, 255, 0.035) !important;
+  background: rgba(255, 255, 255, 0.025) !important;
 }
 
-/* 글 상세 화면 */
+/* =========================================================
+   Post detail
+   ========================================================= */
+
 article.px-1 {
-  padding: 40px !important;
+  padding: clamp(24px, 4vw, 46px) !important;
   border: 1px solid var(--mac-border);
   border-radius: 20px;
-  background: rgba(35, 36, 40, 0.85);
-  box-shadow: 0 25px 65px rgba(0, 0, 0, 0.32);
+  background: rgba(35, 36, 40, 0.82);
+  box-shadow: var(--mac-shadow);
 }
 
-/* 코드 블록 */
+article h1,
+article h2,
+article h3 {
+  color: var(--mac-text);
+  letter-spacing: -0.035em;
+}
+
+.content a:not(.img-link) {
+  color: #64aaff;
+}
+
+code.highlighter-rouge {
+  padding: 0.15em 0.4em;
+  border: 1px solid rgba(255, 255, 255, 0.065);
+  border-radius: 6px;
+  background: #292a2e;
+  color: #ff9f43;
+}
+
 div.highlighter-rouge,
 figure.highlight {
+  overflow: hidden;
   border: 1px solid var(--mac-border) !important;
   border-radius: 14px !important;
   background: #202124 !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.2);
 }
 
-/* 푸터 */
+blockquote {
+  border-left: 3px solid var(--mac-blue) !important;
+  border-radius: 0 11px 11px 0;
+  background: rgba(10, 132, 255, 0.065);
+}
+
+/* =========================================================
+   Footer
+   ========================================================= */
+
 footer {
   border-top: 1px solid var(--mac-border) !important;
+  color: #75767b !important;
 }
 
-/* 모바일 */
+/* =========================================================
+   Scrollbar
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #151619;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid #151619;
+  border-radius: 999px;
+  background: #3d3e43;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4c4e54;
+}
+
+/* =========================================================
+   Mobile
+   ========================================================= */
+
 @media (max-width: 849px) {
   #topbar::before {
     display: none;
   }
 
   #post-list .card-body {
-    padding-top: 48px !important;
+    padding: 62px 20px 23px !important;
+  }
+
+  #post-list .card-body::before {
+    left: 20px;
   }
 
   article.px-1 {
@@ -197,6 +387,9 @@ footer {
   }
 }
 
-body {
-    outline:8px solid red !important;
+@media (prefers-reduced-motion: reduce) {
+  #post-list .card,
+  #sidebar .nav-link {
+    transition: none !important;
+  }
 }
