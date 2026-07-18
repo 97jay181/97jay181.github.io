@@ -6,7 +6,7 @@ const posts = [
       "새로운 macOS 스타일 블로그를 시작합니다. 개발 공부와 프로젝트, 일상을 기록할 예정입니다.",
     date: "2026.07.18",
     category: "Blog",
-    href: "#",
+    href: "/posts/first-post/",
   },
   {
     title: "Astro로 블로그 만들기",
@@ -14,7 +14,7 @@ const posts = [
       "기존 테마를 벗어나 Astro로 직접 설계하는 과정을 정리합니다.",
     date: "2026.07.18",
     category: "Development",
-    href: "#",
+    href: "/posts/astro-blog/",
   },
 ];
 ---
@@ -49,7 +49,12 @@ const posts = [
             <span>hiJay97</span>
           </div>
 
-          <button class="theme-toggle" type="button" aria-label="테마 변경">
+          <button
+            class="theme-toggle"
+            type="button"
+            aria-label="라이트 모드와 다크 모드 전환"
+            title="테마 변경"
+          >
             ◐
           </button>
         </header>
@@ -67,26 +72,33 @@ const posts = [
 
             <nav class="navigation" aria-label="주요 메뉴">
               <a class="active" href="/">
-                <span>⌂</span>
+                <span aria-hidden="true">⌂</span>
                 Home
               </a>
+
               <a href="#blog">
-                <span>▤</span>
+                <span aria-hidden="true">▤</span>
                 Blog
               </a>
+
               <a href="#projects">
-                <span>⌘</span>
+                <span aria-hidden="true">⌘</span>
                 Projects
               </a>
+
               <a href="#about">
-                <span>◉</span>
+                <span aria-hidden="true">◉</span>
                 About
               </a>
             </nav>
 
             <div class="sidebar-footer">
-              <a href="https://github.com/97jay181" target="_blank">
-                GitHub
+              <a
+                href="https://github.com/97jay181"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub ↗
               </a>
             </div>
           </aside>
@@ -95,19 +107,26 @@ const posts = [
             <header class="content-header">
               <div>
                 <span class="eyebrow">Welcome</span>
-                <h2>생각과 경험을<br />기록하는 공간.</h2>
+
+                <h2>
+                  생각과 경험을<br />
+                  기록하는 공간.
+                </h2>
+
                 <p>
                   개발, 프로젝트, 도구와 일상에 대한 기록을 남깁니다.
                 </p>
               </div>
 
-              <label class="search">
+              <label class="search" for="searchInput">
                 <span aria-hidden="true">⌕</span>
+
                 <input
                   id="searchInput"
                   type="search"
                   placeholder="Spotlight Search"
                   autocomplete="off"
+                  aria-label="게시글 검색"
                 />
               </label>
             </header>
@@ -125,31 +144,37 @@ const posts = [
               <div class="post-grid" id="postGrid">
                 {
                   posts.map((post) => (
-                    <article
+                    <a
                       class="post-card"
+                      href={post.href}
+                      aria-label={`${post.title} 게시글 읽기`}
                       data-search={`${post.title} ${post.description} ${post.category}`}
                     >
                       <div class="post-meta">
                         <span>{post.category}</span>
-                        <time>{post.date}</time>
+                        <time datetime="2026-07-18">{post.date}</time>
                       </div>
 
-                      <div class="card-icon">⌘</div>
+                      <div class="card-icon" aria-hidden="true">
+                        ⌘
+                      </div>
 
-                      <h4>
-                        <a href={post.href}>{post.title}</a>
-                      </h4>
+                      <h4>{post.title}</h4>
 
                       <p>{post.description}</p>
 
-                      <a class="read-more" href={post.href}>
+                      <span class="read-more">
                         Read article
-                        <span>→</span>
-                      </a>
-                    </article>
+                        <span aria-hidden="true">→</span>
+                      </span>
+                    </a>
                   ))
                 }
               </div>
+
+              <p id="emptyMessage" class="empty-message" hidden>
+                검색 결과가 없습니다.
+              </p>
             </section>
 
             <section class="section" id="projects">
@@ -164,13 +189,36 @@ const posts = [
                 <div>
                   <span class="project-status">In progress</span>
                   <h4>macOS GitHub Blog</h4>
+
                   <p>
                     Astro와 GitHub Pages를 이용해 만드는 macOS 감성의
                     개인 블로그입니다.
                   </p>
                 </div>
 
-                <span class="project-arrow">↗</span>
+                <span class="project-arrow" aria-hidden="true">↗</span>
+              </article>
+            </section>
+
+            <section class="section" id="about">
+              <div class="section-heading">
+                <div>
+                  <span class="section-label">About</span>
+                  <h3>소개</h3>
+                </div>
+              </div>
+
+              <article class="about-card">
+                <div class="about-icon" aria-hidden="true">J</div>
+
+                <div>
+                  <h4>안녕하세요, hiJay97입니다.</h4>
+
+                  <p>
+                    개발 과정에서 배운 내용과 프로젝트 경험, 생산성 도구,
+                    일상에 관한 생각을 기록합니다.
+                  </p>
+                </div>
               </article>
             </section>
           </section>
@@ -182,10 +230,30 @@ const posts = [
       const themeButton = document.querySelector(".theme-toggle");
       const searchInput = document.querySelector("#searchInput");
       const postCards = document.querySelectorAll(".post-card");
+      const emptyMessage = document.querySelector("#emptyMessage");
 
       themeButton?.addEventListener("click", () => {
         document.documentElement.classList.toggle("light");
+
+        const isLight =
+          document.documentElement.classList.contains("light");
+
+        try {
+          localStorage.setItem("theme", isLight ? "light" : "dark");
+        } catch {
+          // localStorage를 사용할 수 없는 환경에서는 무시합니다.
+        }
       });
+
+      try {
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "light") {
+          document.documentElement.classList.add("light");
+        }
+      } catch {
+        // localStorage를 사용할 수 없는 환경에서는 기본 다크 테마를 사용합니다.
+      }
 
       searchInput?.addEventListener("input", (event) => {
         const input = event.currentTarget;
@@ -195,15 +263,28 @@ const posts = [
         }
 
         const keyword = input.value.trim().toLowerCase();
+        let visibleCount = 0;
 
         postCards.forEach((card) => {
           if (!(card instanceof HTMLElement)) {
             return;
           }
 
-          const searchText = card.dataset.search?.toLowerCase() ?? "";
-          card.hidden = !searchText.includes(keyword);
+          const searchText =
+            card.dataset.search?.toLowerCase() ?? "";
+
+          const isVisible = searchText.includes(keyword);
+
+          card.hidden = !isVisible;
+
+          if (isVisible) {
+            visibleCount += 1;
+          }
         });
+
+        if (emptyMessage instanceof HTMLElement) {
+          emptyMessage.hidden = visibleCount !== 0;
+        }
       });
     </script>
   </body>
@@ -264,7 +345,11 @@ const posts = [
     background:
       radial-gradient(
         circle at 15% 0%,
-        color-mix(in srgb, var(--wallpaper-accent) 80%, transparent),
+        color-mix(
+          in srgb,
+          var(--wallpaper-accent) 80%,
+          transparent
+        ),
         transparent 34rem
       ),
       radial-gradient(
@@ -385,6 +470,15 @@ const posts = [
     transform: scale(1.04);
   }
 
+  .theme-toggle:focus-visible,
+  .navigation a:focus-visible,
+  .post-card:focus-visible,
+  .section-heading a:focus-visible,
+  .sidebar-footer a:focus-visible {
+    outline: 3px solid rgba(10, 132, 255, 0.45);
+    outline-offset: 3px;
+  }
+
   .window-body {
     display: grid;
     grid-template-columns: 260px minmax(0, 1fr);
@@ -489,7 +583,12 @@ const posts = [
     font-size: 13px;
   }
 
+  .sidebar-footer a:hover {
+    color: var(--accent);
+  }
+
   .content {
+    min-width: 0;
     padding: clamp(32px, 5vw, 72px);
   }
 
@@ -558,6 +657,10 @@ const posts = [
     color: var(--tertiary);
   }
 
+  .section {
+    scroll-margin-top: 30px;
+  }
+
   .section + .section {
     margin-top: 64px;
   }
@@ -589,7 +692,8 @@ const posts = [
   }
 
   .post-card,
-  .project-card {
+  .project-card,
+  .about-card {
     border: 1px solid var(--border);
     border-radius: 18px;
     background:
@@ -603,18 +707,27 @@ const posts = [
     transition:
       transform 180ms ease,
       border-color 180ms ease,
-      background 180ms ease;
+      background 180ms ease,
+      box-shadow 180ms ease;
   }
 
   .post-card {
+    display: flex;
+    min-height: 310px;
+    flex-direction: column;
     padding: 25px;
+    cursor: pointer;
   }
 
   .post-card:hover,
-  .project-card:hover {
+  .project-card:hover,
+  .about-card:hover {
     transform: translateY(-3px);
     border-color: var(--border-strong);
     background: var(--surface-hover);
+    box-shadow:
+      inset 0 1px rgba(255, 255, 255, 0.055),
+      0 18px 40px rgba(0, 0, 0, 0.14);
   }
 
   .post-meta {
@@ -643,14 +756,16 @@ const posts = [
   }
 
   .post-card h4,
-  .project-card h4 {
+  .project-card h4,
+  .about-card h4 {
     margin: 0;
     font-size: 22px;
     letter-spacing: -0.035em;
   }
 
   .post-card p,
-  .project-card p {
+  .project-card p,
+  .about-card p {
     margin: 12px 0 28px;
     color: var(--secondary);
     font-size: 14px;
@@ -661,9 +776,18 @@ const posts = [
     display: inline-flex;
     align-items: center;
     gap: 7px;
+    margin-top: auto;
     color: var(--accent);
     font-size: 13px;
     font-weight: 650;
+  }
+
+  .post-card:hover .read-more span {
+    transform: translateX(3px);
+  }
+
+  .read-more span {
+    transition: transform 160ms ease;
   }
 
   .project-card {
@@ -690,6 +814,41 @@ const posts = [
   .project-arrow {
     color: var(--secondary);
     font-size: 26px;
+  }
+
+  .about-card {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    padding: 26px;
+  }
+
+  .about-icon {
+    display: grid;
+    width: 58px;
+    height: 58px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    background: var(--surface);
+    color: var(--accent);
+    font-size: 23px;
+    font-weight: 750;
+  }
+
+  .about-card p {
+    max-width: 700px;
+    margin-bottom: 0;
+  }
+
+  .empty-message {
+    margin: 28px 0 0;
+    padding: 28px;
+    border: 1px dashed var(--border-strong);
+    border-radius: 16px;
+    color: var(--secondary);
+    text-align: center;
   }
 
   [hidden] {
@@ -792,6 +951,27 @@ const posts = [
 
     .search {
       width: 100%;
+    }
+
+    .post-card {
+      min-height: 0;
+    }
+
+    .project-card,
+    .about-card {
+      align-items: flex-start;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      transition: none !important;
     }
   }
 </style>
