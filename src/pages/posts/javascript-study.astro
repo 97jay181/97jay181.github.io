@@ -1,0 +1,132 @@
+---
+const title = "JavaScript 공부 기록";
+const date = "2026.07.19";
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title} | hiJay97</title>
+  </head>
+
+  <body>
+    <main class="article-window">
+      <header class="toolbar">
+        <div class="traffic">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <a href="/">← Home</a>
+      </header>
+
+      <article>
+  <p class="date">{date}</p>
+  <h1>{title}</h1>
+
+  <p>
+    오늘은 JavaScript의 비동기 처리에 대해 공부했습니다.
+  </p>
+
+  <h2>Promise란?</h2>
+
+  <p>
+    Promise는 비동기 작업의 결과를 나타내는 객체입니다.
+  </p>
+</article>
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(body) {
+    min-height: 100vh;
+    margin: 0;
+    padding: 48px 20px;
+    color: #f5f5f7;
+    background:
+      radial-gradient(circle at 10% 0%, #26334a, transparent 38rem),
+      #090a0d;
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      "Apple SD Gothic Neo",
+      sans-serif;
+  }
+
+  .article-window {
+    width: min(900px, 100%);
+    margin: 0 auto;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 22px;
+    background: rgba(28, 29, 34, 0.92);
+    box-shadow: 0 40px 100px rgba(0, 0, 0, 0.45);
+  }
+
+  .toolbar {
+    display: flex;
+    min-height: 56px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .toolbar a {
+    color: #0a84ff;
+    text-decoration: none;
+  }
+
+  .traffic {
+    display: flex;
+    gap: 8px;
+  }
+
+  .traffic span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  .traffic span:nth-child(1) {
+    background: #ff5f57;
+  }
+
+  .traffic span:nth-child(2) {
+    background: #febc2e;
+  }
+
+  .traffic span:nth-child(3) {
+    background: #28c840;
+  }
+
+  article {
+    padding: clamp(32px, 7vw, 72px);
+  }
+
+  h1 {
+    margin: 10px 0 28px;
+    font-size: clamp(38px, 7vw, 64px);
+    letter-spacing: -0.055em;
+  }
+
+  p {
+    color: #b5b5ba;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+
+  .date {
+    color: #0a84ff;
+    font-size: 13px;
+    font-weight: 700;
+  }
+</style>
